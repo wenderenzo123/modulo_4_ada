@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churrascômetro</title>
+    <style>
+        body {
+            background-image: url('img/churras.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    
+        #step3 {
+            background-color: #fff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        h2 {
+            color: #333;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+    
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+    
+        #quantidadeCarne,
+        #quantidadeCerveja,
+        #quantidadeSal,
+        #quantidadeRefrigerante,
+        #quantidadeAgua,
+        #quantidadeCarvao,
+        #quantidadeGelo,
+        #quantidadePaoDeAlho {
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Churrascômetro - Passo 3</h1>
+    <div id="step3">
+        <h2>Resultado do Cálculo:</h2>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantidade</th>
+            </tr>
+            <tr>
+                <td>Carne</td>
+                <td id="quantidadeCarne"></td>
+            </tr>
+            <tr>
+                <td>Cerveja</td>
+                <td id="quantidadeCerveja"></td>
+            </tr>
+            <tr>
+                <td>Sal Grosso</td>
+                <td id="quantidadeSal"></td>
+            </tr>
+            <tr>
+                <td>Refrigerante</td>
+                <td id="quantidadeRefrigerante"></td>
+            </tr>
+            <tr>
+                <td>Água</td>
+                <td id="quantidadeAgua"></td>
+            </tr>
+            <tr>
+                <td>Carvão</td>
+                <td id="quantidadeCarvao"></td>
+            </tr>
+            <tr>
+                <td>Gelo</td>
+                <td id="quantidadeGelo"></td>
+            </tr>
+            <tr>
+                <td>Pão de Alho</td>
+                <td id="quantidadePaoDeAlho"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const homens = parseInt(localStorage.getItem('homens')) || 0;
+        const mulheres = parseInt(localStorage.getItem('mulheres')) || 0;
+        const criancas = parseInt(localStorage.getItem('criancas')) || 0;
+        const bebidas = parseInt(localStorage.getItem('bebidas')) || 0;
+
+        const quantidadeCarne = (0.4 * homens + 0.32 * mulheres + 0.2 * criancas).toFixed(2);
+        const quantidadeCerveja = (3 * bebidas).toFixed(2);
+        const quantidadeSal = (0.04 * (homens + mulheres + criancas + bebidas)).toFixed(2);
+        const quantidadeRefrigerante = (1 * Math.ceil((homens + mulheres + criancas + bebidas) / 5)).toFixed(2);
+        const quantidadeAgua = (1 * Math.ceil((homens + mulheres + criancas + bebidas) / 5)).toFixed(2);
+        const quantidadeCarvao = (1 * (homens + mulheres + criancas + bebidas)).toFixed(2);
+        const quantidadeGelo = (5 * Math.ceil((homens + mulheres + criancas + bebidas) / 10)).toFixed(2);
+        const quantidadePaoDeAlho = (2 * (homens + mulheres) + 1 * criancas).toFixed(2);
+
+        document.getElementById('quantidadeCarne').textContent = quantidadeCarne + ' KG';
+        document.getElementById('quantidadeCerveja').textContent = quantidadeCerveja + ' garrafas';
+        document.getElementById('quantidadeSal').textContent = quantidadeSal + ' KG';
+        document.getElementById('quantidadeRefrigerante').textContent = quantidadeRefrigerante + ' garrafas';
+        document.getElementById('quantidadeAgua').textContent = quantidadeAgua + ' garrafas';
+        document.getElementById('quantidadeCarvao').textContent = quantidadeCarvao + ' KG';
+        document.getElementById('quantidadeGelo').textContent = quantidadeGelo + ' KG';
+        document.getElementById('quantidadePaoDeAlho').textContent = quantidadePaoDeAlho + ' unidades';
+    </script>
+</body>
+</html>
